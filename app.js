@@ -5,7 +5,7 @@ const path = require("path");
 
 const app = express();
 app.use(express.json());
-
+app.use(express.static(path.join(__dirname, 'public')));
 const dbPath = path.join(__dirname, "todoApplication.db");
 
 let db = null;
@@ -26,6 +26,14 @@ const initializeDBAndServer = async () => {
 };
 
 initializeDBAndServer();
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/add_user/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'new_user.html'));
+})
 
 app.get("/todos/", async (request, response) => {
   const { status = "%%", priority = "%%", search_q = "%%" } = request.query;

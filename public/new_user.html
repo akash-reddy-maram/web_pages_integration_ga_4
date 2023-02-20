@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Reddy Demo</title>
+    <link rel="stylesheet" href="new_user.css">
+
+    <script type="text/javascript">
+        ! function(t, e) {
+            if (void 0 === e[t]) {
+                e[t] = function() {
+                    e[t].clients.push(this), this._init = [Array.prototype.slice.call(arguments)]
+                }, e[t].clients = [];
+                for (var r = function(t) {
+                        return function() {
+                            return this["_" + t] = this["_" + t] || [], this["_" + t].push(Array.prototype.slice.call(arguments)), this
+                        }
+                    }, s = ["addRecord", "blockEvents", "fetchServerCookie", "fetchGlobalID", "fetchUserSegments", "resetUUID", "ready", "setSignedMode", "setAnonymousMode", "set", "trackEvent", "trackPageview", "trackClicks", "unblockEvents"], n = 0; n < s.length; n++) {
+                    var c = s[n];
+                    e[t].prototype[c] = r(c)
+                }
+                var o = document.createElement("script");
+                o.type = "text/javascript", o.async = !0, o.src = ("https:" === document.location.protocol ? "https:" : "http:") + "//cdn.treasuredata.com/sdk/2.5/td.min.js";
+                var a = document.getElementsByTagName("script")[0];
+                a.parentNode.insertBefore(o, a)
+            }
+        }("Treasure", this);
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        var td = new Treasure({
+            host: 'in.treasuredata.com',
+            writeKey: '11627/2a66003db296a28e84237bae368523ad331302d5',
+            database: 'test_database',
+            startInSignedMode: true
+        });
+        // Enable cross-domain tracking
+        td.set('$global', 'td_global_id', 'td_global_id');
+        // Track pageview information to 'pageviews' table
+        td.trackPageview('page_views');
+    </script>
+
+</head>
+
+<body>
+    <div class="background">
+        <div class="p-4 inner-container ml-auto mr-auto">
+            <h1 class="mb-4"> Add User </h1>
+            <form id="addUserForm">
+                <div class="mb-4">
+                    <label for="name" class="label-element"> Name </label>
+                    <input type="text" id="name" class="input-element" placeholder="Enter your name" />
+                    <p class="error-message" id="nameErrMsg"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="label-element"> Email </label>
+                    <input type="text" id="email" class="input-element" placeholder="Enter your email" />
+                    <p class="error-message" id="emailErrMsg"></p>
+                </div>
+                <div class="mb-4">
+                    <label for="address" class="label-element"> Address </label>
+                    <input type="text" id="address" class="input-element" placeholder="Enter your address" />
+                    <p class="error-message" id="addressErrMsg"></p>
+                </div>
+                <div class="mb-4">
+                    <label class="label-element" for="status"> Working Status </label>
+                    <select id="status" class="select-element">
+                        <option value="Active"> Active </option>
+                        <option value="Inactive"> Inactive </option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <h1 class="label-element"> Gender </h1>
+                    <input id="genderMale" value="Male" type="radio" name="gender" checked="" />
+                    <label for="genderMale" class="radio-label"> Male </label>
+                    <input id="genderFemale" value="Female" type="radio" name="gender" />
+                    <label for="genderFemale" class="radio-label"> Female </label>
+                </div>
+                <button class="btn btn-primary" type="submit"> Submit </button>
+            </form>
+        </div>
+        <script>
+            let formEl = document.getElementById("addUserForm");
+            let userData = {
+                name: "",
+                email: "",
+                status: "Active",
+                address: "",
+                gender: "Male"
+            };
+
+            let nameErrMsg = document.getElementById("nameErrMsg");
+            let emailErrMsg = document.getElementById("emailErrMsg");
+            let addressErrMsg = document.getElementById("addressErrMsg");
+
+            let nameEl = document.getElementById("name");
+            nameEl.addEventListener("change", function(event) {
+                userData.name = event.target.value;
+            });
+
+            let emailEl = document.getElementById("email");
+            emailEl.addEventListener("change", function(event) {
+                userData.email = event.target.value;
+            });
+
+            let workingStatusEl = document.getElementById("status");
+            workingStatusEl.addEventListener("change", function(event) {
+                userData.status = event.target.value;
+            });
+
+            let maleGenderEl = document.getElementById("genderMale");
+            maleGenderEl.addEventListener("change", function(event) {
+                userData.gender = event.target.value;
+            });
+
+            let femaleGenderEl = document.getElementById("genderFemale");
+            femaleGenderEl.addEventListener("change", function(event) {
+                userData.gender = event.target.value;
+            });
+
+            let addressEl = document.getElementById("address");
+            addressEl.addEventListener("change", function(event) {
+                userData.address = event.target.value;
+            });
+
+
+
+            function onSubmitDetails() {
+                if (userData.name === "") {
+                    nameErrMsg.textContent = "Required*";
+                } else {
+                    nameErrMsg.textContent = "";
+                }
+                if (userData.email === "") {
+                    emailErrMsg.textContent = "Required*";
+                } else {
+                    emailErrMsg.textContent = "";
+                }
+                if (userData.address === "") {
+                    addressErrMsg.textContent = 'Required*';
+                } else {
+                    addressErrMsg.textContent = "";
+                }
+                if (userData.name !== "" && userData.email !== "" && userData.address !== "") {
+                    td.trackEvent('clicks', {
+                        id: this.id
+                    });
+                    td.addRecord('user_details', userData);
+                    nameEl.value = "";
+                    emailEl.value = "";
+                    addressEl.value = "";
+                }
+            }
+
+            formEl.addEventListener("submit", function(event) {
+                event.preventDefault();
+                onSubmitDetails();
+            });
+        </script>
+    </div>
+</body>
+
+</html>
